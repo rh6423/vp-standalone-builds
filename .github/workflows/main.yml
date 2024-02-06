@@ -43,3 +43,14 @@ jobs:
         run:  ls -la
       - name: look at what's there in main directory
         run:  ls -la
+      - name: look at what's there in build directory
+        working-directory: vpinball/build
+        run:  ls -la
+      - name: compress the app
+        working-directory: vpinball/build/ARM
+        run: tar -czvf VPinballX_GL_macos12.tar.gz *app
+      - name: download the artifact
+        uses: actions/upload-artifact@v2
+        with:
+          -name: VPinballX_GL_macos12.tar.gz
+          path: vpinball/build/ARM
