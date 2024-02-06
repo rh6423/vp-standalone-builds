@@ -13,9 +13,9 @@ jobs:
       - name: Install homebrew
         run: brew install autoconf automake libtool cmake bison curl
       - name: set up path
-        run: export PATH="$(brew --prefix bison)/bin:$PATH"
+        run: export PATH="/usr/local/opt/bison/bin:$PATH"
       - name: Test path
-        run: which bison
+        run: export LDFLAGS="-L/usr/local/opt/bison/lib"
       - name: check bison version
         run: bison --version
       - name: git clone
