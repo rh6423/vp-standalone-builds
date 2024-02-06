@@ -41,10 +41,8 @@ jobs:
       - name: compress the app
         working-directory: vpinball
         run: |
-          mkdir ../tmp
-          cp -r build/ARM/V* ../tmp
-          cd ../tmp
-          tar -czvf VPinballX_GL_macos12.tar.gz V*
+          cp -Rp `find VPinball*app` .
+          tar -czvf VPinballX_GL_macos12.tar.gz VPinball*app
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
