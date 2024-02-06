@@ -26,27 +26,23 @@ jobs:
         run: bison --version
       - name: git clone
         run: git clone -b standalone https://github.com/vpinball/vpinball
-      - name: cd to platform architecture directory
-        run: cd vpinball/standalone/macos-arm64
-      - name: get current directory
-        run: pwd
-      - name: check path
-        run: echo $PATH
       - name: run external.sh
+        working-directory: vpinball/standalone/macos-arm64
         run: ./external.sh
-      - name: cd to build directory
-        run: cd ../..
       - name: copy CMakeLists
+        working-directory: vpinball
         run: cp standalone/cmake/CMakeLists_gl-macos-arm64.txt CMakeLists.txt
       - name: cmake build
+        working-directory: vpinball
         run: cmake -DCMAKE_BUILD_TYPE=Release -B build
       - name: build
+        working-directory: vpinball
         run: cmake --build build -- -j$(sysctl -n hw.ncpu)
       - name: compress the app
-        run: tar -czvf VPinballX_GL.app.tar.gz build/arm/VPinballX_GL.app 
+        run: tar -czvf VPinballX_GL_macos12.tar.gz vpinball/build/armVPinballX_GL.app 
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
-          -name: VPinballX_GL.app.tar.gz
+          -name: tar -czvf VPinballX_GL_macos12.tar.gz
           path: ./
         
