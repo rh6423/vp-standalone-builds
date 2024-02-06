@@ -17,10 +17,8 @@ jobs:
       - name: Test path
         run: echo "$PATH"
       - name: set up LDFLAGS in github env
-        run: echo "-L/usr/local/opt/bison/lib" >> $GITHUB_ENV
+        run: echo "-L/usr/local/opt/bison/lib" >> $GITHUB_LDFLAGS
       - name: Test LDFLAGS
-        env:
-          LDFLAGS: ${{ env.LDFLAGS }}
         run: echo "$LDFLAGS"
       - name: Test LDFLAGS
         run: echo $LDFLAGS
