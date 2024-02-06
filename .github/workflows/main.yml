@@ -22,6 +22,10 @@ jobs:
         run: git clone -b standalone https://github.com/vpinball/vpinball
       - name: cd to platform architecture directory
         run: cd vpinball/standalone/macos-arm64
+      - name: get current directory
+        run: pwd
+      - name: check path
+        run: echo $PATH
       - name: run external.sh
         run: ./external.sh
       - name: cd to build directory
