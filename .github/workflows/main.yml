@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: macos-12
+    env:
+      LDFLAGS: -L/usr/local/opt/bison/lib
     steps:
       - uses: actions/checkout@v4
       - name: xcode switch
@@ -16,8 +18,6 @@ jobs:
         run: echo "/usr/local/opt/bison/bin" >> $GITHUB_PATH
       - name: Test path
         run: echo "$PATH"
-      - name: set up LDFLAGS in github env
-        run: echo "-L/usr/local/opt/bison/lib" >> $GITHUB_LDFLAGS
       - name: Test LDFLAGS
         run: echo "$LDFLAGS"
       - name: Test LDFLAGS
