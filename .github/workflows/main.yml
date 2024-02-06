@@ -6,7 +6,7 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-      ta         description: 'Test scenario tags'
+          description: 'Test scenario tags'
 jobs:
   build:
     runs-on: macos-12
