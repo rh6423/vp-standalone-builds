@@ -39,7 +39,7 @@ jobs:
         working-directory: vpinball
         run: cmake --build build -- -j$(sysctl -n hw.ncpu)
       - name: compress the app
-        run: tar -czvf VPinballX_GL_macos12.tar.gz vpinball/build/ARM/VPinballX_GL.app 
+        run: tar -czvf VPinballX_GL_macos12.tar.gz vpinball/build/ARM
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
