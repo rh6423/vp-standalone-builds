@@ -6,9 +6,7 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-      tags:
-        description: 'Test scenario tags'
-
+      ta         description: 'Test scenario tags'
 jobs:
   build:
     runs-on: macos-12
@@ -38,10 +36,11 @@ jobs:
         run: cmake -DCMAKE_BUILD_TYPE=Release -B build
       - name: build
         run: cmake --build build -- -j$(sysctl -n hw.ncpu)
-      name: compress the app
-      run: tar -czvf VPinballX_GL.app.tar.gz build/arm/VPinballX_GL.app 
-      name: download the artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: VPinballX_GL.app.tar.gz
-        path: .
+      - name: compress the app
+        run: tar -czvf VPinballX_GL.app.tar.gz build/arm/VPinballX_GL.app 
+      - name: download the artifact
+        uses: actions/upload-artifact@v2
+        with:
+          -name: VPinballX_GL.app.tar.gz
+          path: ./
+        
