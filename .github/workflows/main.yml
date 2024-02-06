@@ -47,10 +47,10 @@ jobs:
         working-directory: vpinball/build
         run:  ls -la
       - name: compress the app
-        working-directory: vpinball/build/ARM
+        working-directory: vpinball/build
         run: tar -czvf VPinballX_GL_macos12.tar.gz *app
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
           -name: VPinballX_GL_macos12.tar.gz
-          path: vpinball/build/ARM
+          path: vpinball/build
