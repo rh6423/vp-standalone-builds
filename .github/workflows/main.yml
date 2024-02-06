@@ -1,12 +1,8 @@
 name: vpx-build-macos12
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-          description: 'Test scenario tags'
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: macos-12
