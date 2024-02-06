@@ -1,4 +1,4 @@
-name: vpx-build-macos13
+name: vpx-build-macos12
 on:
   workflow_dispatch:
     inputs:
@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: macos-12
-
     steps:
       - uses: actions/checkout@v2
       - name: xcode switch
