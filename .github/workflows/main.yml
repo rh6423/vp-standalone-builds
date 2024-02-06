@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: macos-12
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: xcode switch
         run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
       - name: Install homebrew
