@@ -15,7 +15,11 @@ jobs:
       - name: set up path
         run: export PATH="/usr/local/opt/bison/bin:$PATH"
       - name: Test path
+        run: echo $PATH
+      - name: set up LDFLAGS
         run: export LDFLAGS="-L/usr/local/opt/bison/lib"
+      - name: Test LDFLAGS
+        run: echo $LDFLAGS
       - name: check bison version
         run: bison --version
       - name: git clone
