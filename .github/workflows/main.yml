@@ -13,9 +13,11 @@ jobs:
       - name: Install homebrew
         run: brew install autoconf automake libtool cmake bison curl
       - name: set up path
-        run: export PATH="/usr/local/opt/bison/bin:$PATH"
+        run: echo /usr/local/opt/bison/bin:$PATH >> $GITHUB_ENV
       - name: Test path
-        run: echo $PATH
+        env:
+          MY_PATH: ${{ env.PATH }}
+        run: echo "$MY_PATH"
       - name: set up LDFLAGS
         run: export LDFLAGS="-L/usr/local/opt/bison/lib"
       - name: Test LDFLAGS
