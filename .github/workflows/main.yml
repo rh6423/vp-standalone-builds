@@ -38,14 +38,8 @@ jobs:
       - name: build
         working-directory: vpinball
         run: cmake --build build -- -j$(sysctl -n hw.ncpu)
-      - name: compress the app
+      - name: look at what's there in vpinball
         working-directory: vpinball
-        run: |
-          cp -Rp `find VPinball*app` .
-          tar -czvf VPinballX_GL_macos12.tar.gz VPinball*app
-      - name: download the artifact
-        uses: actions/upload-artifact@v2
-        with:
-          -name: VPinballX_GL_macos12.tar.gz
-          path: ./
-        
+        run:  ls -la
+      - name: look at what's there in main directory
+        run:  ls -la
