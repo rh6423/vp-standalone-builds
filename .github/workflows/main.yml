@@ -18,8 +18,12 @@ jobs:
         env:
           MY_PATH: ${{ env.PATH }}
         run: echo "$MY_PATH"
-      - name: set up LDFLAGS
-        run: export LDFLAGS="-L/usr/local/opt/bison/lib"
+      - name: set up LDFLAGS in github env
+        run: echo "-L/usr/local/opt/bison/lib" >> $GITHUB_ENV
+      - name: Test LDFLAGS
+        env:
+          LDFLAGS: ${{ env.LDFLAGS }}
+        run: echo "$LDFLAGS"
       - name: Test LDFLAGS
         run: echo $LDFLAGS
       - name: check bison version
