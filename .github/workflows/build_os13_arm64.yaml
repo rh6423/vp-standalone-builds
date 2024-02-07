@@ -43,15 +43,24 @@ jobs:
         run:  ls -la
       - name: make it executable
         working-directory: vpinball/build/VPinballX_GL.app/Contents/MacOS
-        run: chmod +x VPinballX_GL
+        run: |
+          ls -la
+          chmod +x VPinballX_GL
+          ls -la
       - name: clean up directory
         working-directory: vpinball/build
         run: rm -rf CPack* CMake* cmake* libglad.a Makefile
+      - name: create pickup directory
+        working-directory: vpinball/build
+        run: mkdir VPX_os13_arm64
+      - name: move to pickup directory
+        working-directory: vpinball/build
+        run: mv VPinballX_GL.app VPX_os13_arm64
       - name: check directory
         working-directory: vpinball/build
         run: ls -la
       - name: download the artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: VPX_os13_arm64
           path: vpinball/build
