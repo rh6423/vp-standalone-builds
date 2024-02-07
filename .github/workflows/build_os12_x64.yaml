@@ -47,6 +47,12 @@ jobs:
       - name: clean up directory
         working-directory: vpinball/build
         run: rm -rf CPack* CMake* cmake* libglad.a Makefile
+      - name: create pickup directory
+        working-directory: vpinball/build
+        run: mkdir VPX_os12_x64
+      - name: move to pickup directory
+        working-directory: vpinball/build
+        run: mv VPinballX_GL.app VPX_os12_x64
       - name: check directory
         working-directory: vpinball/build
         run: ls -la
