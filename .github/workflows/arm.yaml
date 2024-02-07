@@ -57,13 +57,8 @@ jobs:
       - name: compress the app
         working-directory: vpinball/build
         run: zip ../../pickup/VPX_os13_arm64.zip VPinballX_GL.app
-      - name: download the app
+      - name: download the app and source
         uses: actions/upload-artifact@v4
         with:
-          name: VPX_os13_arm64.zip
-          path: pickup
-      - name: download the source
-        uses: actions/upload-artifact@v4
-        with:
-          name: vpinball-source.zip
+          name: *.zip
           path: pickup
