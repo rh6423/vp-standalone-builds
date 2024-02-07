@@ -1,0 +1,67 @@
+
+name: build-macos13-arm64
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: macos-13
+    env:
+      LDFLAGS: -L/usr/local/opt/bison/lib
+    steps:
+      - uses: actions/checkout@v4
+      - name: xcode switch
+        run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+      - name: Install homebrew
+        run: brew install autoconf automake libtool cmake bison curl
+      - name: set up path
+        run: echo "/usr/local/opt/bison/bin" >> $GITHUB_PATH
+      - name: Test path
+        run: echo "$PATH"
+      - name: Test LDFLAGS
+        run: echo "$LDFLAGS"
+      - name: check bison version
+        run: bison --version
+      - name: git clone vpinball/vpinball standalone branch
+        run: git clone -b standalone https://github.com/vpinball/vpinball
+      - name: run external.sh
+        working-directory: vpinball/standalone/macos-arm64
+        run: ./external.sh
+      - name: copy CMakeLists
+        working-directory: vpinball
+        run: cp standalone/cmake/CMakeLists_gl-macos-arm64.txt CMakeLists.txt
+      - name: cmake build
+        working-directory: vpinball
+        run: cmake -DCMAKE_BUILD_TYPE=Release -B build
+      - name: build
+        working-directory: vpinball
+        run: cmake --build build -- -j$(sysctl -n hw.ncpu)
+      - name: look at what's there in vpinball
+        working-directory: vpinball
+        run:  ls -la
+      - name: look at what's there in main directory
+        run:  ls -la
+      - name: look at what's there in build directory
+        working-directory: vpinball/build
+        run:  ls -la
+      - name: make it executable
+        working-directory: vpinball/build/VPinballX_GL.app/Contents/MacOS
+        run: |
+          ls -la
+          chmod +x VPinballX_GL
+          ls -la
+      - name: clean up directory
+        working-directory: vpinball/build
+        run: rm -rf CPack* CMake* cmake* libglad.a Makefile
+      - name: create pickup directory
+        working-directory: vpinball/build
+        run: |
+          mkdir VPX_os13_arm64
+          mv VPinballX_GL.app VPX_os13_arm64
+          ls -la
+          tar -czvf VPX_os13_arm64.tgz VPX_os13_arm64
+          rm -rf VPX_os13_arm64
+          ls -la
+      - name: download the artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VPX_os13_arm64.tgz
+          path: vpinball/build
