@@ -60,10 +60,5 @@ jobs:
       - name: download the app and source
         uses: actions/upload-artifact@v4
         with:
-          name: *.zip
-          path: pickup
-      - name: download the app and source
-        uses: actions/upload-artifact@v4
-        with:
           name: pickup
           path: pickup/*.zip
