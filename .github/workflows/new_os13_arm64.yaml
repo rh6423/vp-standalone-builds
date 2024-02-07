@@ -62,6 +62,9 @@ jobs:
       - name: set execute bit
         working-directory: vpinball/build
         run: chmod +x VPX_os13_arm64/VPinballX_GL.app/Contents/MacOS/VPinballX_GL
+      - name: compress
+        working-directory: vpinball/build
+        run: tar -czf VPX_os13_arm64.tar.gz VPX_os13_arm64
       - name: download the artifact
         uses: actions/upload-artifact@v4
         with:
