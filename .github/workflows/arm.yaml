@@ -32,6 +32,7 @@ jobs:
         run: ls -la
       - name: check base directory
         run: pwd
+      - name: list base directory
         run: ls -la
       - name: run external.sh
         working-directory: vpinball/standalone/macos-arm64
