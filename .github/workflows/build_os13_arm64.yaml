@@ -26,14 +26,11 @@ jobs:
       - name: git clone
         run: git clone -b standalone https://github.com/vpinball/vpinball
       - name: zip source directory
-        run: zip pickup/vpinball-source.zip vpinball
+        run: zip vpinball-source.zip vpinball
       - name: validate pickup and zip
-        working-directory: pickup
         run: ls -la
       - name: check base directory
         run: pwd
-      - name: list base directory
-        run: ls -la
       - name: run external.sh
         working-directory: vpinball/standalone/macos-arm64
         run: ./external.sh
@@ -56,14 +53,16 @@ jobs:
         run:  ls -la
       - name: compress the app
         working-directory: vpinball/build
-        run: zip ../../pickup/VPX_os13_arm64.zip VPinballX_GL.app
+        run: zip ../../VPX_os13_arm64.zip VPinballX_GL.app
+      - name: check files
+        run: ls -la
       - name: download the app
         uses: actions/upload-artifact@v4
         with:
           name: VPX_os13_arm64.zip
-          path: pickup
+          path: VPX_os13_arm64.zip
       - name: download the source
         uses: actions/upload-artifact@v4
         with:
           name: vpinball-source.zip
-          path: pickup
+          path: vpinball-source.zip
