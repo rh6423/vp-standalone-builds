@@ -1,4 +1,4 @@
-name: vpx-build-macos12
+name: build-macos12-x64
 on: workflow_dispatch
 jobs:
   build:
