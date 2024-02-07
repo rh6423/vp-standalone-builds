@@ -63,5 +63,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           -name: VPX_os13_arm64.zip
-          path: vpinball/build
+          path: pickup
           -name: vpinball-source.zip
+          path: pickup
