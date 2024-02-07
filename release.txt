@@ -1,0 +1,13 @@
+# This should have all the metadata and choices exposed for a build run.
+# When complete, this file will be the new trigger event for a build.
+# not sure if there will be one release file, or one per release, or one per architecture.
+
+###################################
+# Contents wish list
+###################################
+# date command to get yyyymmdd format on macos:
+# date +%Y%m%d
+
+# hash of vpinball repo (and branch) ADD A SOURCE ZIP TO ARTIFACT INSTEAD
+# target architecture (x64 or arm64)
+# target OS version (12 is default)
