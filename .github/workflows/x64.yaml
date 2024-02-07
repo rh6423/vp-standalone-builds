@@ -1,0 +1,56 @@
+name: vpx-build-macos12
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: macos-12
+    env:
+      LDFLAGS: -L/usr/local/opt/bison/lib
+    steps:
+      - uses: actions/checkout@v4
+      - name: xcode switch
+        run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+      - name: Install homebrew
+        run: brew install autoconf automake libtool cmake bison curl
+      - name: set up path
+        run: echo "/usr/local/opt/bison/bin" >> $GITHUB_PATH
+      - name: Test path
+        run: echo "$PATH"
+      - name: Test LDFLAGS
+        run: echo "$LDFLAGS"
+      - name: Test LDFLAGS
+        run: echo $LDFLAGS
+      - name: check bison version
+        run: bison --version
+      - name: git clone
+        run: git clone -b standalone https://github.com/vpinball/vpinball
+      - name: run external.sh
+        working-directory: vpinball/standalone/macos-x64
+        run: ./external.sh
+      - name: copy CMakeLists
+        working-directory: vpinball
+        run: cp standalone/cmake/CMakeLists_gl-macos-x64.txt CMakeLists.txt
+      - name: cmake build
+        working-directory: vpinball
+        run: cmake -DCMAKE_BUILD_TYPE=Release -B build
+      - name: build
+        working-directory: vpinball
+        run: cmake --build build -- -j$(sysctl -n hw.ncpu)
+      - name: look at what's there in vpinball
+        working-directory: vpinball
+        run:  ls -la
+      - name: look at what's there in main directory
+        run:  ls -la
+      - name: look at what's there in build directory
+        working-directory: vpinball/build
+        run:  ls -la
+      - name: compress the app
+        working-directory: vpinball/build
+        run: zip VPXos12_x64.zip *app
+      - name: download the artifact
+        uses: actions/upload-artifact@v2
+        with:
+          -name: VPXos12_x64.zip
+          path: vpinball/build
