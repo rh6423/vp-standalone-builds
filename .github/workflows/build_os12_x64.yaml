@@ -46,12 +46,12 @@ jobs:
         run: chmod +x VPinballX_GL
       - name: clean up directory
         working-directory: vpinball/build
-        run: rm -rf CMake* cmake* libglad.a Makefile
+        run: rm -rf CPack* CMake* cmake* libglad.a Makefile
       - name: check directory
         working-directory: vpinball/build
         run: ls -la
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
-          name: VPX_os12_x64.zip
+          name: VPX_os12_x64
           path: vpinball/build
