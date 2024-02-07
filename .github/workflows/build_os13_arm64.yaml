@@ -17,20 +17,10 @@ jobs:
         run: echo "$PATH"
       - name: Test LDFLAGS
         run: echo "$LDFLAGS"
-      - name: Test LDFLAGS
-        run: echo $LDFLAGS
       - name: check bison version
         run: bison --version
-      - name: create pickup directory
-        run: mkdir pickup
-      - name: git clone
+      - name: git clone vpinball/vpinball standalone branch
         run: git clone -b standalone https://github.com/vpinball/vpinball
-      - name: zip source directory
-        run: zip vpinball-source.zip vpinball
-      - name: validate pickup and zip
-        run: ls -la
-      - name: check base directory
-        run: pwd
       - name: run external.sh
         working-directory: vpinball/standalone/macos-arm64
         run: ./external.sh
@@ -57,9 +47,6 @@ jobs:
       - name: compress the app
         working-directory: vpinball/build
         run: zip VPX_os13_arm64.zip VPinballX_GL.app/
-      - name: check files
-        working-directory: vpinball/build
-        run: ls -la
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:

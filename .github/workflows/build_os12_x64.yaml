@@ -1,8 +1,5 @@
 name: vpx-build-macos12
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 jobs:
   build:
     runs-on: macos-12
@@ -20,8 +17,6 @@ jobs:
         run: echo "$PATH"
       - name: Test LDFLAGS
         run: echo "$LDFLAGS"
-      - name: Test LDFLAGS
-        run: echo $LDFLAGS
       - name: check bison version
         run: bison --version
       - name: git clone
@@ -46,9 +41,12 @@ jobs:
       - name: look at what's there in build directory
         working-directory: vpinball/build
         run:  ls -la
+      - name: make it executable
+        working-directory: vpinball/build/VPinballX_GL.app/Contents/MacOS
+        run: chmod +x VPinballX_GL
       - name: compress the app
         working-directory: vpinball/build
-        run: zip VPXos12_x64.zip *app
+        run: zip VPXos12_x64.zip VPinballX_GL.app/
       - name: download the artifact
         uses: actions/upload-artifact@v2
         with:
