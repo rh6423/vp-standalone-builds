@@ -62,7 +62,7 @@ jobs:
         with:
           name: VPX_os13_arm64.zip
           path: pickup
-      - name: download the app
+      - name: download the source
         uses: actions/upload-artifact@v4
         with:
           name: vpinball-source.zip
